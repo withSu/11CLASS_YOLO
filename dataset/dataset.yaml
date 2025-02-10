@@ -1,0 +1,35 @@
+# OBB 데이터셋 구성
+train: /home/a/A_2024_selfcode/CLASS-PCB_Yolo/dataset/train
+val: /home/a/A_2024_selfcode/CLASS-PCB_Yolo/dataset/val
+
+nc: 11  # 클래스 개수
+
+names:
+  - 'Chip'
+  - 'CSolder'
+  - '2sideIC'
+  - 'SOD'
+  - 'Circle'
+  - '4sideIC'
+  - 'Tantalum'
+  - 'BGA'
+  - 'MELF'
+  - 'Crystal'
+  - 'Array'
+
+# OBB 학습용 설정
+obb: false  # OBB 활성화 (필요 없으면 false)
+
+# 데이터 증강 설정 (train 단계에서 적용됨)
+augmentation:
+  flipud: 0.5       # 수직 뒤집기 확률
+  fliplr: 0.5       # 수평 뒤집기 확률
+  scale: 0.5        # 이미지 확대/축소 비율
+  hsv_h: 0.015      # 색조 조정 (0~1 사이 값)
+  hsv_s: 0.7        # 채도 조정 (0~1 사이 값)
+  hsv_v: 0.4        # 명도 조정 (0~1 사이 값)
+  degrees: 10       # 이미지 회전 각도 (OBB 활성화 시 필요)
+  translate: 0.1    # 이미지 이동 비율
+  shear: 0.0        # 이미지 기울기
+  mosaic: 1.0       # 모자이크 증강 (기본 활성화)
+  mixup: 0.2        # 두 이미지 혼합 비율
