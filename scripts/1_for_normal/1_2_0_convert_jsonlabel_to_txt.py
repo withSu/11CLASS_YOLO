@@ -12,7 +12,7 @@ TARGET_HEIGHT = 800
 # 클래스 매핑 (YOLO 형식은 숫자 클래스 ID를 사용함)
 CLASS_NAMES = {
     'Chip': 0,
-    'CSolder': 1,
+    'Solder': 1,
     '2sideIC': 2,
     'SOD': 3,
     'Circle': 4,

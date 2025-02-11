@@ -21,9 +21,9 @@ def calculate_iou(boxA, boxB):
     return iou
 
 # 데이터 로드
-gt_file = "/home/a/A_2024_selfcode/NEW-PCB_Yolo/dataset/ground_truth.json"
-pred_file = "/home/a/A_2024_selfcode/NEW-PCB_Yolo/outputs_for_exper/run/coco_predictions_final_normalized.json"
-image_dir = "/home/a/A_2024_selfcode/NEW-PCB_Yolo/dataset/images/val"  
+gt_file = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/dataset/ground_truth.json"
+pred_file = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/outputs_for_exper/run/coco_predictions_final_normalized.json"
+image_dir = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/dataset/images/val"  
 
 with open(gt_file, "r") as f:
     gt_data = json.load(f)

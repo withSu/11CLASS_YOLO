@@ -3,8 +3,8 @@
 import os
 
 # 경로 설정
-IMAGES_DIR = '/home/a/A_2024_selfcode/NEW-PCB_Yolo/dataset/1_1_800images'
-LABELS_DIR = '/home/a/A_2024_selfcode/NEW-PCB_Yolo/dataset/4_800size_txt_labels'
+IMAGES_DIR = '/home/a/A_2024_selfcode/CLASS-PCB_Yolo/dataset/1_1_800images'
+LABELS_DIR = '/home/a/A_2024_selfcode/CLASS-PCB_Yolo/dataset/4_800size_txt_labels'
 
 # 지원하는 이미지 확장자
 IMAGE_EXTENSIONS = ['.jpg', '.png', '.jpeg']

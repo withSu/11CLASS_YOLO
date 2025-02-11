@@ -3,9 +3,9 @@ import json
 from PIL import Image
 
 def create_ground_truth_json(
-    image_dir = "/home/a/A_2024_selfcode/NEW-PCB_Yolo/dataset/val/images",
-    label_dir = "/home/a/A_2024_selfcode/NEW-PCB_Yolo/dataset/val/labels",
-    output_json = "/home/a/A_2024_selfcode/NEW-PCB_Yolo/dataset/ground_truth.json"
+    image_dir = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/dataset/val/images",
+    label_dir = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/dataset/val/labels",
+    output_json = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/dataset/ground_truth.json"
 ):
     """
     YOLO 라벨(txt) 파일을 COCO 형식의 ground_truth.json으로 변환한다.

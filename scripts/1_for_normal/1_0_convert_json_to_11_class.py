@@ -6,7 +6,7 @@ import json
 # 클래스 이름과 ID 매핑
 category_map = {
     'Chip': 0,
-    'CSolder': 1,
+    'Solder': 1,
     '2sideIC': 2,
     'SOD': 3,
     'Circle': 4,
