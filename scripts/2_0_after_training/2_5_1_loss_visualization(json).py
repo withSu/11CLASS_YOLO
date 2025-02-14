@@ -2,10 +2,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # 파일 경로 지정
-csv_path = "/home/a/A_2024_selfcode/NEW-PCB_Yolo/outputs_800yolo/run3/results.csv"
+json_path = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/outputs_11class_aug_yolo/run2/results.csv"
 
-# CSV 파일 읽기
-df = pd.read_csv(csv_path)
+# JSON 파일 읽기
+df = pd.read_json(json_path)
 
 # 학습 단계(에포크) 확인
 epochs = df["epoch"]

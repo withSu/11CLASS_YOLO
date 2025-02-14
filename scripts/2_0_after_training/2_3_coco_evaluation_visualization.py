@@ -142,7 +142,7 @@ def visualize_and_iou(gt_file, pred_file, image_dir, num_samples=5):
 if __name__ == "__main__":
     # 사용자가 원하는 경로
     gt_file = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/dataset/ground_truth.json"
-    pred_file = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/runs/detect/val/coco_predictions.json"
+    pred_file = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/runs/detect/val4/coco_predictions.json"
     image_dir = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/dataset/val/images"
 
     # 시각화 함수 실행

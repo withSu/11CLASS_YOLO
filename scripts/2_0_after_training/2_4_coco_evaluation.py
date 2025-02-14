@@ -22,7 +22,7 @@ def coco_evaluation(gt_file, dt_file):
 
 if __name__ == "__main__":
     gt_path = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/dataset/ground_truth.json"
-    dt_path = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/runs/detect/val/coco_predictions.json"
+    dt_path = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/runs/detect/val4/coco_predictions.json"
 
     results = coco_evaluation(gt_path, dt_path)
     print("COCO Evaluation Results:", results)

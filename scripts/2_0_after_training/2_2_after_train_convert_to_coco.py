@@ -76,7 +76,7 @@ def convert_yolo_to_coco(yolo_pred_file, coco_output_file, gt_file):
 
 if __name__ == "__main__":
     gt_file = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/dataset/ground_truth.json"
-    yolo_pred_file = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/runs/detect/val/predictions.json"
-    coco_output_file = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/runs/detect/val/coco_predictions.json"
+    yolo_pred_file = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/runs/detect/val4/predictions.json"
+    coco_output_file = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/runs/detect/val4/coco_predictions.json"
 
     convert_yolo_to_coco(yolo_pred_file, coco_output_file, gt_file)
