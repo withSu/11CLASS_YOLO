@@ -22,30 +22,36 @@ def yolo_to_coco(dataset_dir, output_json):
         "annotations": [],
         "categories": []
     }
-    # 아래에서 enumerate를 사용하여 0부터 category_id를 할당한다.
+
+    # category_id가 0부터 시작하도록 설정
     for i, cat_name in enumerate(category_names):
         coco_data["categories"].append({
             "id": i,
             "name": cat_name
         })
+
     annotation_id = 1
     image_id = 1
     image_paths = []
     for ext in ["*.jpg", "*.jpeg", "*.png", "*.JPG", "*.JPEG", "*.PNG"]:
         image_paths += glob.glob(os.path.join(image_dir, ext))
     image_paths.sort()
+
     for img_path in image_paths:
         file_name = os.path.basename(img_path)
         stem, _ = os.path.splitext(file_name)
         label_path = os.path.join(label_dir, stem + ".txt")
+
         with Image.open(img_path) as img:
             w_img, h_img = img.size
+
         coco_data["images"].append({
             "id": image_id,
             "file_name": file_name,
             "width": w_img,
             "height": h_img
         })
+
         if os.path.exists(label_path):
             with open(label_path, "r") as f:
                 lines = f.readlines()
@@ -63,6 +69,7 @@ def yolo_to_coco(dataset_dir, output_json):
                     y_min = (y_center - h_norm/2) * h_img
                     bbox_w = w_norm * w_img
                     bbox_h = h_norm * h_img
+
                     coco_data["annotations"].append({
                         "id": annotation_id,
                         "image_id": image_id,
@@ -72,14 +79,18 @@ def yolo_to_coco(dataset_dir, output_json):
                         "iscrowd": 0
                     })
                     annotation_id += 1
+
         image_id += 1
+
     with open(output_json, "w", encoding="utf-8") as f:
         json.dump(coco_data, f, indent=2)
+
     print("YOLO 라벨 → COCO 변환 완료:", output_json)
 
 def fix_predictions(dt_json_path, gt_json_path, is_normalized=False):
     coco_gt = COCO(gt_json_path)
-    # ground truth의 file_name을 소문자로 변환한 값과 확장자 제거한 값을 매핑한다.
+
+    # Ground truth의 이미지 파일명을 소문자로 변환하여 매핑
     filename_to_id = {}
     for img_id, info in coco_gt.imgs.items():
         fn = info["file_name"].lower()
@@ -91,7 +102,6 @@ def fix_predictions(dt_json_path, gt_json_path, is_normalized=False):
         dt_data = json.load(f)
 
     fixed = []
-    # 가능한 확장자는 소문자만 고려한다.
     possible_exts = [".jpg", ".jpeg", ".png"]
 
     for pred in dt_data:
@@ -105,16 +115,9 @@ def fix_predictions(dt_json_path, gt_json_path, is_normalized=False):
         else:
             file_or_id_lower = file_or_id.lower()
             stem, ext = os.path.splitext(file_or_id_lower)
-            candidates = []
-            candidates.append(file_or_id_lower)
-            if not ext:
-                for e in possible_exts:
-                    candidates.append(stem + e)
-            new_id = None
-            for candi in candidates:
-                if candi in filename_to_id:
-                    new_id = filename_to_id[candi]
-                    break
+            candidates = [file_or_id_lower] + [stem + e for e in possible_exts if not ext]
+            new_id = next((filename_to_id[candi] for candi in candidates if candi in filename_to_id), None)
+
             if new_id is None:
                 print("⚠ 매칭 실패:", file_or_id)
                 continue
@@ -148,17 +151,23 @@ def coco_evaluation(gt_json_path, dt_json_path):
     coco_gt = COCO(gt_json_path)
     coco_dt = coco_gt.loadRes(dt_json_path)
     coco_eval = COCOeval(coco_gt, coco_dt, "bbox")
+
+    # DETR과 동일하게 IoU 임계값 설정
     coco_eval.params.iouThrs = np.linspace(0.5, 0.95, 10)
+
     coco_eval.evaluate()
     coco_eval.accumulate()
     coco_eval.summarize()
+
     return coco_eval.stats
 
 if __name__ == "__main__":
     dataset_dir = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/dataset/val"
     gt_json = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/dataset/coco_gt.json"
     yolo_to_coco(dataset_dir, gt_json)
+
     dt_json = "/home/a/A_2024_selfcode/CLASS-PCB_Yolo/runs/detect/val4/predictions.json"
     dt_fixed = fix_predictions(dt_json, gt_json, is_normalized=False)
+
     results = coco_evaluation(gt_json, dt_fixed)
     print("COCO Evaluation Results:", results)
